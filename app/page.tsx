@@ -16,6 +16,7 @@ export default function Page() {
             The start of your new startup... What are you gonna build?
           </p>
 
+
           <a
             className="btn btn-primary"
             href="https://shipfa.st/docs"
