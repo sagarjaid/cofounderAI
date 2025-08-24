@@ -5,11 +5,28 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Users, Zap, Shield, Calendar, Linkedin, Search, Star } from "lucide-react"
 import Link from "next/link"
-import { signInWithLinkedIn } from "@/libs/supabase/auth"
-import { useState } from "react"
+import { signInWithLinkedIn, getCurrentUser } from "@/libs/supabase/auth"
+import { useState, useEffect } from "react"
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false)
+  const [user, setUser] = useState<any>(null)
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true)
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const currentUser = await getCurrentUser()
+        setUser(currentUser)
+      } catch (error) {
+        console.error("Error checking auth:", error)
+      } finally {
+        setIsCheckingAuth(false)
+      }
+    }
+    
+    checkAuth()
+  }, [])
 
   const handleLinkedInSignIn = async () => {
     setIsLoading(true)
@@ -20,6 +37,18 @@ export default function HomePage() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  // Show loading state while checking authentication
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-slate-600">Loading...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -48,12 +77,15 @@ export default function HomePage() {
             </Link>
           </nav>
           <div className="flex items-center space-x-3">
-            <Button variant="ghost" asChild>
-              <Link href="/login">Sign In</Link>
-            </Button>
-            <Button onClick={handleLinkedInSignIn} disabled={isLoading}>
-              {isLoading ? "Connecting..." : "Join Beta"}
-            </Button>
+            {user ? (
+              <Button asChild>
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+            ) : (
+              <Button onClick={handleLinkedInSignIn} disabled={isLoading}>
+                {isLoading ? "Connecting..." : "Join Beta"}
+              </Button>
+            )}
           </div>
         </div>
       </header>
@@ -74,10 +106,16 @@ export default function HomePage() {
             ready to build the next big thing together.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button size="lg" className="text-lg px-8 py-6" onClick={handleLinkedInSignIn} disabled={isLoading}>
-              <Linkedin className="w-5 h-5 mr-2" />
-              {isLoading ? "Connecting..." : "Join with LinkedIn"}
-            </Button>
+            {user ? (
+              <Button size="lg" className="text-lg px-8 py-6" asChild>
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+            ) : (
+              <Button size="lg" className="text-lg px-8 py-6" onClick={handleLinkedInSignIn} disabled={isLoading}>
+                <Linkedin className="w-5 h-5 mr-2" />
+                {isLoading ? "Connecting..." : "Join with LinkedIn"}
+              </Button>
+            )}
             <Button size="lg" variant="outline" className="text-lg px-8 py-6 bg-transparent" asChild>
               <Link href="#features">Learn More</Link>
             </Button>
@@ -274,16 +312,27 @@ export default function HomePage() {
           <p className="text-xl mb-8 opacity-90">
             Join hundreds of entrepreneurs who are building the future together.
           </p>
-          <Button
-            size="lg"
-            variant="secondary"
-            className="text-lg px-8 py-6"
-            onClick={handleLinkedInSignIn}
-            disabled={isLoading}
-          >
-            <Linkedin className="w-5 h-5 mr-2" />
-            {isLoading ? "Connecting..." : "Get Started - Free Beta"}
-          </Button>
+          {user ? (
+            <Button
+              size="lg"
+              variant="secondary"
+              className="text-lg px-8 py-6"
+              asChild
+            >
+              <Link href="/dashboard">Dashboard</Link>
+            </Button>
+          ) : (
+            <Button
+              size="lg"
+              variant="secondary"
+              className="text-lg px-8 py-6"
+              onClick={handleLinkedInSignIn}
+              disabled={isLoading}
+            >
+              <Linkedin className="w-5 h-5 mr-2" />
+              {isLoading ? "Connecting..." : "Get Started - Free Beta"}
+            </Button>
+          )}
         </div>
       </section>
 
