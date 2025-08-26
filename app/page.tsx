@@ -18,12 +18,16 @@ import {
   Search,
   Star,
   Sparkle,
+  Check,
 } from "lucide-react";
 import Link from "next/link";
 import { signInWithLinkedIn, getCurrentUser } from "@/libs/supabase/auth";
 import { useState, useEffect } from "react";
 import FooterBig from "@/components/FooterBig";
-
+import Sam from "@/app/sam.png";  
+import Naval from "@/app/naval.png";
+import Michael from "@/app/michael.png";
+      
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<any>(null);
@@ -108,7 +112,7 @@ export default function HomePage() {
       <section className="py-32 px-4 bg-gradient-to-t from-white via-blue-100 to-white">
         <div className="container mx-auto text-center max-w-4xl">
           <div className="mb-12">
-            <Badge className="bg-white text-gray-600 px-4 border-gray-100 py-2 rounded-full border">
+            <Badge className="bg-white text-gray-600 px-4 border-gray-200 py-2 rounded-full border">
               Now in Private Beta - Free Access
             </Badge>
           </div>
@@ -157,7 +161,7 @@ export default function HomePage() {
       </section>
 
       {/* Founder Types */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-30 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">
@@ -272,52 +276,135 @@ export default function HomePage() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="py-16 px-4 bg-white">
-        <div className="container mx-auto max-w-4xl text-center">
+      <section id="pricing" className="py-30 px-4 bg-white">
+        <div className="flex flex-col items-center mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-bold mb-4">
             Simple, Transparent Pricing
           </h2>
           <p className="text-slate-600 text-lg mb-12">
-            Join our exclusive network of verified entrepreneurs
+          Pricing designed to get you a co-founder
           </p>
 
-          <div className="flex flex-col items-center max-w-xs gap-8 w-full mx-auto">
-            <div className="bg-white border-2 border-green-200 rounded-lg p-4 shadow-sm relative w-full">
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-extrabold text-green-700 my-2">
+          <div className="flex flex-col items-start max-w-sm gap-6 w-full">
+            <div className="border-2 border-green-200 bg-gradient-to-br from-green-50 to-white p-6 rounded-xl w-full shadow-lg">
+              
+              {/* Header Section */}
+              <div className="text-left mb-6">
+                <div className="inline-block bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                  Limited Time Beta Access
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
                   Success Plan
                 </h3>
-                <p className="text-gray-500 text-xs">
-                  Limited time beta access
+                <div className="flex items-baseline gap-2 mb-2">
+                  <span className="text-4xl font-black text-green-600">FREE</span>
+                   
+                  <span className="text-lg text-gray-400 line-through">$49/month</span>
+                </div>
+                <p className="text-sm text-gray-600">
+                  Get started with full platform access
                 </p>
               </div>
 
-              <div className="text-center space-y-4">
-                <div className="text-4xl font-extrabold text-gray-800 my-4">
-                  FREE
+              {/* Features List */}
+              <div className="space-y-4 mb-6">
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" strokeWidth={3} /> 
+                  <span className="text-sm text-gray-700">Full platform access</span>
                 </div>
-                <div className="text-xl text-gray-500 line-through mb-4">
-                  $49/month
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" strokeWidth={3} /> 
+                  <span className="text-sm text-gray-700">Unlimited search</span>
                 </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" strokeWidth={3} /> 
+                  <span className="text-sm text-gray-700">Calendar integration</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" strokeWidth={3} /> 
+                  <span className="text-sm text-gray-700">Priority support</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" strokeWidth={3} /> 
+                  <span className="text-sm text-gray-700">Featured profile</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-green-600" strokeWidth={3} /> 
+                  <span className="text-sm text-gray-700">And many more features</span>
+                </div>
+              </div>
 
-                <div className="flex  border-t-1 pt-6 flex-col gap-2 items-center">
-                  <span className="text-sm text-black">
-                    Full platform access
-                  </span>
-                  <span className="text-sm text-black">Unlimited search</span>
-                  <span className="text-sm text-black">
-                    Calendar integration
-                  </span>
-                  <span className="text-sm text-black">Priority support</span>
-                  <span className="text-sm text-black">Featured profile</span>
-                  <span className="text-sm text-black">And many more</span>
-                </div>
+              {/* CTA Button */}
+              <button className="w-full text-sm bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold p-4 rounded transition-all duration-200 transform  cursor-pointer">
+                Start finding co-founder Now!
+              </button>
+              
+            </div>
+          </div>
+        </div>
+      </section>
 
-                <div className="mt-6">
-                  <button className="bg-green-700 w-full rounded hover:bg-green-800 text-white font-semibold py-3 px-6 cursor-pointer">
-                    Get a Co-Founder Now
-                  </button>
+      {/* Headout */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container mx-auto max-w-6xl">
+          <h3 className="text-center text-2xl md:text-3xl font-bold text-gray-900 mb-20">
+            What they say about startup co-founders?
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+
+                        {/* Item 2 */}
+                        <div className="flex flex-col items-center text-center">
+              <div className="relative w-full max-w-xs">
+                <div className="bg-gray-900 text-white rounded-xl px-5 py-6  h-40 flex items-center justify-center leading-relaxed shadow-md relative after:content-[''] after:absolute after:bottom-[-12px] after:left-1/2 after:-translate-x-1/2 after:w-6 after:h-6 after:bg-gray-900 after:rotate-45 after:rounded-sm">
+                  “Invest in working with people you trust. The right
+                  co-founder is a force multiplier.”
                 </div>
+              </div>
+              <div className="mt-6 flex flex-col items-center">
+                <img src={Naval.src} alt="Entrepreneur" className="h-30 w-30 object-contain" />
+                <div className="mt-3 text-sm font-semibold tracking-wide">
+                  Naval Ravikant
+                </div>
+                <div className="text-xs text-gray-500">Angel Investor</div>
+              </div>
+            </div>
+
+            {/* Item 1 */}
+            <div className="flex flex-col items-center text-center">
+              <div className="relative w-full max-w-xs">
+                <div className="bg-gray-900 text-white rounded-xl px-5 py-6 h-40 flex items-center justify-center leading-relaxed shadow-md relative after:content-[''] after:absolute after:bottom-[-12px] after:left-1/2 after:-translate-x-1/2 after:w-6 after:h-6 after:bg-gray-900 after:rotate-45 after:rounded-sm">
+                  “Do these things before you start: talk to users and ship
+                  something. Startups die of indifference more than
+                  competition.”
+                </div>
+              </div>
+              <div className="mt-6 flex flex-col items-center">
+                <img src={Sam.src} alt="Entrepreneur" className="h-40 w-40 object-contain" />
+                <div className="mt-3 text-sm font-semibold tracking-wide">
+                  Sam Altman
+                </div>
+                <div className="text-xs text-gray-500">OPENAI founder</div>
+              </div>
+            </div>
+
+
+
+            {/* Item 3 */}
+            <div className="flex flex-col items-center text-center">
+              <div className="relative w-full max-w-xs">
+                <div className="bg-gray-900 text-white rounded-xl px-5 py-6 h-40 flex items-center justify-center leading-relaxed shadow-md relative after:content-[''] after:absolute after:bottom-[-12px] after:left-1/2 after:-translate-x-1/2 after:w-6 after:h-6 after:bg-gray-900 after:rotate-45 after:rounded-sm">
+                  “The top twenty most valuable tech companies out of the U.S.
+                  have at least two co-founders.”
+                </div>
+              </div>
+              <div className="mt-6 flex flex-col items-center">
+                <img src={Michael.src} alt="Entrepreneur" className="h-30 w-30 object-contain" />
+                <div className="mt-3 text-sm font-semibold tracking-wide">
+                  Michael Seibel
+                </div>
+                <div className="text-xs text-gray-500">YC Partner</div>
               </div>
             </div>
           </div>
