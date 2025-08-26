@@ -150,7 +150,7 @@ export default function HomePage() {
                   onClick={handleLinkedInSignIn}
                   disabled={isLoading}
                 >
-                  {isLoading ? "Connecting..." : "Connect with LinkedIn"}
+                  {isLoading ? "Connecting..." : "Continue with LinkedIn"}
                 </Button>
               )}
             </div>
